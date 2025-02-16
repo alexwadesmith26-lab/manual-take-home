@@ -1,0 +1,6 @@
+version: 2
+
+models:
+  - name: dim_customer
+    description: >
+      Table contains dimensions related to dates.

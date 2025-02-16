@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: dim_customer
+    description: >
+      Table contains dimensions related to customers.
+    columns:
+      - name: customer_id
+      - name: customer_country
+      - name: customer_business_category_group
+      - name: inserted_date_time
+  
+  - name: fact_subscription_acquisition
+    description: >
+      Table contains fact measures related to subscription acquisition.
+    columns:
+      - name: subscription_id
+      - name: customer_id
+        data_tests:
+          - relationships:
+              to: ref('dim_customer')
+              field: customer_id
+      - name: subscription_acquisition_date
+      - name: is_acquisition_subscription
+      - name: is_bounced_subscription
+      - name: is_churned_subscription
+
+  - name: fact_subscription_activity
+    description: >
+      Table contains fact measures related to subscription activity.
+    columns:
+      - name: activity_key
+      - name: subscription_id
+      - name: customer_id
+        data_tests:
+          - relationships:
+              to: ref('dim_customer')
+              field: customer_id
+      - name: calendar_date
+      - name: subscription_acquisition_cohort
+      - name: months_of_active_subscription
+      - name: customer_maturity_type
+      - name: is_active_subscription
+      - name: is_churned_subscription
+      - name: inserted_date_time

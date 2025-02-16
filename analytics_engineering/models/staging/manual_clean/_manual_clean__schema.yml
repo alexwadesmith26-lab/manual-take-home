@@ -1,0 +1,49 @@
+version: 2
+
+models:
+  - name: stg_acq_orders
+    description: >
+      Table contains the business category group by customer_id
+    columns:
+      - name: customer_id
+        data_tests:
+          - not_null
+          - unique
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_id
+      - name: taxonomy_business_category_group
+        data_tests:
+          - not_null
+  
+  - name: stg_activity
+    description: >
+      Table contains the start and end dates of customer subscriptions.
+      Currently all subscriptions have an to_date implying that all subscriptions have churned.
+    columns:
+      - name: customer_id
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_customers')
+              field: customer_id
+      - name: subscription_id
+        data_tests:
+          - not_null
+          - unique
+      - name: subscription_start_date
+        data_test:
+          - not_null
+      - name: subscription_end_date
+    
+  - name: stg_customers
+    description: >
+      Table contains the country of origin for a customer.
+    columns:
+      - name: customer_id
+        data_tests:
+          - not_null
+          - unique
+      - name: customer_country
+        data_tests:
+          - not_null

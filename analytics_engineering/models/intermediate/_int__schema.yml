@@ -1,0 +1,57 @@
+version: 2
+
+models:
+  - name: int_customer
+    description: >
+      Table contains dimensions related to customers.
+    columns:
+      - name: customer_id
+        data_tests:
+          - unique
+          - not_null
+      - name: customer_country
+      - name: customer_business_category_group
+      - name: inserted_date_time
+  
+  - name: int_subscription_acquisition
+    description: >
+      Table contains fact measures related to subscription acquisition.
+    columns:
+      - name: subscription_id
+        data_tests:
+          - unique
+          - not_null
+      - name: customer_id
+      - name: subscription_acquisition_date
+      - name: is_acquisition_subscription
+      - name: is_bounced_subscription
+      - name: is_churned_subscription
+
+  - name: int_subscription_activity
+    description: >
+      Table contains fact measures related to subscription activity.
+    columns:
+      - name: activity_key
+        data_tests:
+          - unique
+          - not_null
+      - name: subscription_id
+      - name: customer_id
+      - name: calendar_date
+      - name: subscription_acquisition_cohort
+      - name: months_of_active_subscription
+        description: The number of months the subscription has been active for.
+        data_tests:
+          - dbt_expectations.expect_column_values_to_be_increasing:
+              sort_column: calendar_date
+              strictly: true
+              group_by: ['subscription_id']
+              step: 1
+      - name: customer_maturity_type
+        description: >
+          Subscription active for less than 7 months then 'New Customer'
+          Subscription active for between 7 and 12 months (inclusive) then 'Developing Customer'
+          Subscription active for longer than 12 months then 'Mature Customer'
+      - name: is_active_subscription
+      - name: is_churned_subscription
+      - name: inserted_date_time

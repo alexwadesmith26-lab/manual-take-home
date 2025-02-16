@@ -1,0 +1,31 @@
+version: 2
+
+models:
+  - name: tbl_subscription_acquisition_summary
+    description: >
+      Table contains subscription acquisition cohort level aggregate measures.
+    columns:
+      - name: subscription_acquisition_cohort
+      - name: total_acquisition_subscriptions
+      - name: total_bounced_subscriptions
+      - name: total_non_bounced_subscriptions
+      - name: total_churned_subscriptions
+      - name: average_subscription_length_days
+      - name: inserted_date_time
+  
+  - name: tbl_subscription_activity
+    description: >
+      Table contains dimensions and fact measures related to subscription activity.
+    columns:
+      - name: activity_key
+      - name: subcription_id
+      - name: customer_id
+      - name: calendar_date
+      - name: customer_country
+      - name: customer_business_category_group
+      - name: subscription_acquisition_cohort
+      - name: months_of_active_subscription
+      - name: customer_maturity_type
+      - name: is_active_subscription
+      - name: is_churned_subscription
+      - name: inserted_date_time

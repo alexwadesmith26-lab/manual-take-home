@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: manual_clean
+    schema: manual_clean
+    tables:
+      - name: acq_orders
+      - name: activity
+      - name: customers

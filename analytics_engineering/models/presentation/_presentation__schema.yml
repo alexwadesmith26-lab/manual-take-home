@@ -4,6 +4,8 @@ models:
   - name: tbl_subscription_acquisition_summary
     description: >
       Table contains subscription acquisition cohort level aggregate measures.
+      These are used to calculate retention and churn rates within cohorts.
+      i.e. Total active / churned subscriptions can be divided by the original cohort size.
     columns:
       - name: subscription_acquisition_cohort
       - name: total_acquisition_subscriptions
